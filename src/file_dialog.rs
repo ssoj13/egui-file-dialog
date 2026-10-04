@@ -486,6 +486,18 @@ impl FileDialog {
         &mut self.config
     }
 
+    /// Returns the active filter, or `None` when all files are displayed.
+    /// Hosts can persist its name and restore it with `default_file_filter`.
+    pub fn selected_file_filter(&self) -> Option<&FileFilter> {
+        self.get_selected_file_filter()
+    }
+
+    /// Returns the displayed directory, including after selection or cancellation.
+    /// This allows independent controls to persist their own navigation history.
+    pub fn directory(&self) -> Option<&Path> {
+        self.current_directory()
+    }
+
     /// Sets a predicate called when a directory entry is activated (double-click
     /// or Open-button click).  Return `true` to navigate into the directory
     /// (the default); return `false` to submit it as the picked path instead.
